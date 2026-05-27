@@ -7,16 +7,12 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, accuracy_score
 
-# -------------------------------
 # Load Dataset
-# -------------------------------
 df = pd.read_csv("titanic.csv")
 
 print(df.head())
+# BEFORE PREPROCESSING
 
-# -------------------------------
-# 📊 BEFORE PREPROCESSING
-# -------------------------------
 plt.figure(figsize=(10,4))
 
 plt.subplot(1,2,1)
@@ -48,9 +44,7 @@ le = LabelEncoder()
 df['Sex'] = le.fit_transform(df['Sex'])
 df['Embarked'] = le.fit_transform(df['Embarked'])
 
-# -------------------------------
-# 📊 AFTER PREPROCESSING
-# -------------------------------
+# AFTER PREPROCESSING
 plt.figure(figsize=(10,4))
 
 plt.subplot(1,2,1)
@@ -64,9 +58,7 @@ plt.title("Gender (Encoded)")
 plt.tight_layout()
 plt.show()
 
-# -------------------------------
 # TRAIN MODEL
-# -------------------------------
 X = df.drop('Survived', axis=1)
 y = df['Survived']
 
@@ -81,10 +73,7 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
 print("Accuracy:", accuracy_score(y_test, y_pred))
-
-# -------------------------------
-# 📊 CONFUSION MATRIX HEATMAP
-# -------------------------------
+# CONFUSION MATRIX HEATMAP
 cm = confusion_matrix(y_test, y_pred)
 
 plt.figure(figsize=(5,4))
